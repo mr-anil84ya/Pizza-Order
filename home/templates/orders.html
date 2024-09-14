@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container">
+    <h1>My Home Page</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center"><h1>My Orders</h1></div>
+            {% if orders %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Transaction Id</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+             
+                  {% for order in orders %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td scope="col">{{order.payment_id}}</td>
+                    <td>{{order.get_cart_total}}</td>
+                    {% if order.is_paid %}
+                    <td><button class="btn btn-success">Paid</button></td>
+                    {% endif %}
+                    <td>{{order.created_at}}</td>
+                  </tr>
+                  
+                  {% endfor %}
+              
+                
+                </tbody>
+              </table>
+              {% else %}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Transaction Id</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+             
+               
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    
+                    <td><p>No orders Found</p></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  
+                 
+              
+                
+                </tbody>
+              </table>
+              {% endif %}  
+            
+        </div>
+    </div>
+
+</div>
+{% endblock %}

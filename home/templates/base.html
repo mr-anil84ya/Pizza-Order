@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Order</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" href="/" aria-current="page" href="#">Home</a>
+                  {% if request.user.is_authenticated %}
+                  <a class="nav-link btn btn-primary" href="{% url 'register' %}">Dashboard</a>
+                  <a class="nav-link" href="{% url 'orders' %}">My Order</a>
+                  <a class="nav-link" class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+                  {% else %}
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  {% endif %}
+                  <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+                   {% if request.user.get_cart_count == 0 %}
+                  <a class="btn btn-success" href="/"><i class="fa-solid fa-cart-shopping">Cart</i>{{ request.user.get_cart_count }} </a>
+                  {% else %}
+                  <a class="btn btn-success" href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping">Cart</i>{{ request.user.get_cart_count }} </a>
+                  {% endif %}
+                </div>
+                
+              </div>
+              <button class="btn btn-light"><i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+          </nav>
+    </header>
+    <main>
+        {% block start %}
+
+        {% endblock %}
+    </main>
+    <footer>
+        <h1>Footer Area</h1>
+    </footer>
+    
+</body>
+</html>

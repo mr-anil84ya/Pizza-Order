@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block start %}
+<div>
+    <h1>My Home Page</h1>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for cartitems in carts.cart_items.all %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <th><a href="{% url 'remove_cart_items' cartitems.uid %}"><i class="material-icons">&#xe872;</i></a></th>
+                    <td><img src="/media/{{cartitems.pizza.images}}" height="50px" alt=""></td>
+                    <td>{{cartitems.pizza.pizza_name}}</td>
+                    <td>{{cartitems.pizza.price}}</td>
+                    <td>1</td>
+                    <td>{{cartitems.pizza.price}}</td>
+                  </tr>
+                  
+                  {% endfor %}
+                  
+                
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-end">
+              <p style="font-weight: 600;font-size: large;">Grand Total Price: <a href="{{payment_url}}" class="btn btn-primary">Pay Now {{carts.get_cart_total}}</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

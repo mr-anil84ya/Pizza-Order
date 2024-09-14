@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block start %}
+<div>
+    <h1>My Home Page</h1>
+    <div class="container">
+        <div class="row">
+            {% for pizza in pizzas %}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="/media/{{pizza.images}}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{pizza.pizza_name}}</h5>
+                        <p class="card-text">Price: {{pizza.price}} | Category: {{pizza.category.category_name}}</p>
+                        <a href="{% url 'add-cart' pizza.uid %}" class="btn btn-primary">Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
